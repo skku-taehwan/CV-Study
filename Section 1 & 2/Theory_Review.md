@@ -42,6 +42,7 @@
 대표적으로, Selective Search 기법이 있다.
 
 <p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132099130-15427246-9f82-4de1-b4f3-eebb087d019a.png></p>
+
 **Selective Search의 알고리즘**
 > **1.** 개별 Segment된 모든 부분들을 Bounding box로 만들어 Region Proposal 리스트로 추가
 > 
