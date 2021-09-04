@@ -12,10 +12,11 @@
 **일반적인 Object Detection 모델**
 ![image](https://user-images.githubusercontent.com/74092405/132098360-828a48f0-94e8-41de-84d4-2c61be28af9e.png)
 
-ResNet -> Feature Pyramid Network -> Classification & Regression
-> ㄱ. 원본 이미지와 Object에 대한 정보를 담은 Annotation 파일 준비 
->
-> ㄴ. VGG/ResNet 등의 Feature extractor (FE)에 넣어 중요한 Feature들만 추출하여 Feature Map 생성
-> - Feature map의 경우, 중요한 feature들만 포함됐긴 때문에 이전 데이터보다 추상화된 형태이며, 채널 수는 증가함
-> 
-> ㄷ. Feature Map을 Fully connected (FC) layer에 넣어 학습을 진행하고, Classification과 Regression을 진행 
+**ResNet -> Feature Pyramid Network -> Classification & Regression**
+
+**ㄱ.** 원본 이미지와 Object에 대한 정보를 담은 Annotation 파일 준비 
+
+**ㄴ.** VGG/ResNet 등의 Feature extractor (FE)에 넣어 중요한 Feature들만 추출하여 Feature Map 생성
+ - Feature map의 경우, 중요한 feature들만 포함됐긴 때문에 이전 데이터보다 추상화된 형태이며, 채널 수는 증가함
+
+**ㄷ.** Feature Map을 Fully connected (FC) layer에 넣어 학습을 진행하고, Classification과 Regression을 진행 
