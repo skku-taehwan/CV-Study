@@ -80,4 +80,31 @@ OpenCV 모듈을 ```import cv2```로 가져와 내장된 함수 ```cv2.imread(�
 <p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132540-909b7da3-36be-43e4-8ef2-68e89d5f91e9.png width = 800></p>
 
 
+## 3. opencv_image_n_video.ipynb
 
+### PIL (Python image library)로 이미지 불러오기
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132593-78bdb3fd-46a9-434c-9671-8bd36dd5792e.png width = 800></p>
+
+### Scikit image로 이미지 불러오기
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132623-7ea0334f-1ca0-4a42-b69a-a2490ea789f3.png width = 800></p>
+
+### OpenCV로 이미지 불러오기
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132649-44fce763-a0c9-41fc-bc4a-97a75132f7bd.png width = 800></p>
+
+**BGR 형태로 이미지 불러오기**
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132670-dbd9029f-d809-4a05-a926-22f0404b8ba8.png width = 800></p>
+
+- 이를 방지하기 위해 ```cv2.cvtColor(image, cv2.COLOR_BGR2RGB)``` 코드를 사용.
+
+
+### OpenCV로 영상 처리하기
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132730-f7ca09ca-a7ec-4e9a-b0ef-2d1ffaf187d5.png width = 800></p>
+
+- 영상의 가로 세로 크기가 항상 정수여야 하기 때문에 ```round``` 함수를 사용하여 반올림해줌.
+- ```cap```변수에 비디오 파일을 받아와 ```get``` 함수로 FPS나 Frame의 갯구와 크기 값을 받아옴.
+- ```VideoWriter``` 코드로 Object detection 처리한 영상을 저장.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132777-cac1e4a2-a2f3-4817-a3f3-3466ed7b7d91.png width = 800></p>
+
+- 프레임 별로 Object Detection을 진행하여 bounding box를 표시해줌.
+- 처리가 끝나면, ```release()```를 통해 완성된 영상을 저장함.
