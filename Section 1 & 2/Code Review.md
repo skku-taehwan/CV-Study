@@ -51,7 +51,7 @@ OpenCV 모듈을 ```import cv2```로 가져와 내장된 함수 ```cv2.imread(�
 
 <p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132253-a9a1747a-90fe-474d-a529-121b975a78e4.png width = 800></p>
 
-- ```!ls 경로 | head -n 5```` 코드로 해당 경로 안에 들어있는 파일 5개의 이름을 볼 수 있음.
+- ```!ls 경로 | head -n 5``` 코드로 해당 경로 안에 들어있는 파일 5개의 이름을 볼 수 있음.
  
 <p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132288-8e4cccad-bfaf-494d-b6b0-7d5fedb4f647.png width = 800></p>
 
