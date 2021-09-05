@@ -112,7 +112,7 @@
 
 > **1. 정밀도(Precision):** 예측을 Positive로 한 대상들 중에 예측과 실제값이 Positive로 일치하는 데이터의 비율
 > 
-> Object Detection에서는 검출 알고리즘이 검출 예측한 결과가 **실제 Object들과 얼마나 일치**하는지를 나타내는 지표
+> - Object Detection에서는 검출 알고리즘이 검출 예측한 결과가 **실제 Object들과 얼마나 일치**하는지를 나타내는 지표
 >
 >  ex) 이미지에 있는 동물들을 새(bird)라고 예측했을 때, 실제로 새(bird)일 확률
 > 
@@ -121,3 +121,26 @@
 > - Object Detection에서는 검출 알고리즘이 **실제 Object들을 빠뜨리지 않고, 얼마나 정확히 검출 예측**하는지를 나타내는 지표
 >
 >  ex) 이미지에 있는 새(bird)들을 몇 마리나 정확히 검출했는지의 비율
+>  
+>  **3. 오차 행렬(Confusion Matrix)**
+>  
+>  <p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112285-39a2dcab-0d33-49ca-9fb2-6019c4be8af3.png width = 400></p>
+
+#### Confidence 임곗값에 따른 정밀도-재현율 변화
+
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112319-4355094a-8883-41b8-b505-6752e34d8bde.png width = 600></p>
+
+Confidence 임곗값이 낮을수록 더 많은 bounding box를 생성하여 정밀도는 낮아지고, 재현율은 높아짐.
+- 즉, 이미지의 아무 곳에나 bounding box를 난사하여 실제 object를 찾기가 어려워짐
+
+반대로 Confidence 임곗값이 높으면, bounding box를 잘 만들기 않기 때문에 정밀도는 높아지고, 재현율은 낮아짐.
+
+### 정밀도 재현율 곡선 (Precision-recall curve)
+- Recall 값의 변화에 따른 Precision값을 나타낸 곡선.
+- 이때, 해당 그래프 아래의 면적을 AP (Average precision)이라고 부름.
+
+![image](https://user-images.githubusercontent.com/74092405/132112528-0c9c5e22-6d97-4964-a2dc-b71576a619a4.png)
+
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112319-4355094a-8883-41b8-b505-6752e34d8bde.png width = 600></p>
