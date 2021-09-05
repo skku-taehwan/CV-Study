@@ -7,7 +7,7 @@
 
 **2. Object Detection/Segmentation이란?**
 - 이미지 속에서 여러 개의 Object들의 위치를 Bounding box를 통해 찾아내는 것.
-- Segmentation이란, Object Detection을 찾은 Object들을 Pixel 단위로 Detection하여 찾는 것을 말함. 
+- Segmentation이란, Object Detection을 통해 찾은 Object들을 Pixel 단위로 Detection하여 찾는 것을 말함. 
 
 ## 일반적인 Object Detection 모델
 <p align = "center"> <img src = https://user-images.githubusercontent.com/74092405/132098360-828a48f0-94e8-41de-84d4-2c61be28af9e.png width = 600></p>
