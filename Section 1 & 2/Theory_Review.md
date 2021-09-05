@@ -31,6 +31,7 @@
  **윈도우를 탐색하는 방법**
  > **1.** 다양한 형태의 Window를 사용
  > - 사각형의 크기를 늘리거나 줄여서 사용하기도 하며, 정사각형 직사각형 등 다양한 도형을 사용한다.
+ > 
  > **2.** Scaling 활용
  > - 윈도우의 크기를 변형하지 않고, 이미지 자체의 Scale을 변형하여 여러번 Sliding하여 Object Detection을 진행한다.
  > 
@@ -41,7 +42,7 @@
 영역 추정 방식으로, 원본 이미지에서 Object가 있을만한 위치(또는 영역)를 Bounding box로 모두 표현하고, 최종 후보를 도출하는 방식이다.
 대표적으로, Selective Search 기법이 있다.
 
-<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132099130-15427246-9f82-4de1-b4f3-eebb087d019a.png></p>
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132099130-15427246-9f82-4de1-b4f3-eebb087d019a.png width = 600></p>
 
 **Selective Search의 알고리즘**
 > **1.** 개별 Segment된 모든 부분들을 Bounding box로 만들어 Region Proposal 리스트로 추가
@@ -57,3 +58,45 @@
 > - 즉, 비슷한 Object의 영역들끼리 하나로 합쳐서 표현함.
 > 
 > **3.** 최초에는 **Pixel Intensity**에 기반한 graph-based segment 기법에 따라 Over Segmentation을 수행함.
+
+
+### 3. NMS (Non max supression)
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112019-a9730c69-1edb-4d45-bc25-5e3ac417c7e8.png width = 600></p>
+
+- Object Detection 알고리즘은 Object를 놓치면 안 되기 때문에 Object가 있을만한 모든 위치에 Detection을 수행하는 경향이 강함.
+- NMS는 감지된 모든 Object의 bounding box 중에서 비슷한 위치에 있는 box를 제거하고, **가장 적합한 box를 선택하는 기법**.
+- 즉, 가장 확실한 bounding box 외의 나머지 박스들은 모두 제거하는 기법임.
+- 위 사진처럼, 자동차 주변에 많은 bounding box가 생성되어 있는데, 하나의 차를 인식할 수 있는 가장 확실한 bounding box만 남겨두고, 나머지는 삭제.
+
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112127-d886871a-27b1-4da0-9372-a3afc72d3787.png width = 600></p>
+
+**NMS 수행 알고리즘**
+
+> **1.** Detected된 bounding box별로 특정 Confidence threshold값을 계산하여 특정값 이하의 bounding box는 제거
+> 
+> **2.** 가장 높은 confidence score 값을 갖는 box 순으로 내림차순 정렬 후, 그 box와 겹치는 다른 bounding box들과의 IoU값을 계산하여 특정 threshold 이상인 box는 모두 제거함.
+> 
+> **3.** 남아있는 box만 선택
+> 
+> - 즉, Confidence score가 높을수록, IoU threshold가 낮을수록 많은 bounding box들이 제거됨.
+
+
+## Object Detection 성능 평가 Metric
+
+### 1. IoU (Intersection over union)
+
+- Object Detection 모델이 예측한 결과(Bounding box)와 실측(Ground truth box)가 얼마나 일치하는지를 나타내는 지표
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132111921-09fb6917-4ad6-45bf-972b-47e03f2e1746.png width = 600></p>
+
+- 위 그림처럼 실제 object가 있는 위치와 예측한 bounding box를 포함한 영역과 두 박스가 일치하는 영역의 비율로 IoU를 계산함.
+- IoU 값에 따라 Detection 성능이 좋다/나쁘다를 판단할 수 있음
+- 하지만, 그 값에 대한 기준이 대회/데이터에 따라 다름
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112014-885f8610-0ca4-4aa4-85eb-e921d76db46a.png width = 600></p>
+
+> **1.** Pascal VOC: IoU Metric이 0.5이하이면 False라 판단하고, 그 이상이면 True라 판단.
+> 
+> **2.** MS CoCo: 다양한 기준을 적용하여 평가하는데 있어 까다로움.
