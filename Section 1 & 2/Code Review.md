@@ -101,7 +101,7 @@ OpenCV 모듈을 ```import cv2```로 가져와 내장된 함수 ```cv2.imread(�
 <p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132730-f7ca09ca-a7ec-4e9a-b0ef-2d1ffaf187d5.png width = 800></p>
 
 - 영상의 가로 세로 크기가 항상 정수여야 하기 때문에 ```round``` 함수를 사용하여 반올림해줌.
-- ```cap```변수에 비디오 파일을 받아와 ```get``` 함수로 FPS나 Frame의 갯구와 크기 값을 받아옴.
+- ```cap```변수에 비디오 파일을 받아와 ```get``` 함수로 FPS나 Frame의 갯수와 크기 값을 받아옴.
 - ```VideoWriter``` 코드로 Object detection 처리한 영상을 저장.
 
 <p align = "center"><img src=https://user-images.githubusercontent.com/74092405/132132777-cac1e4a2-a2f3-4817-a3f3-3466ed7b7d91.png width = 800></p>
