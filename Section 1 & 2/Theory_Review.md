@@ -99,4 +99,25 @@
 
 > **1.** Pascal VOC: IoU Metric이 0.5이하이면 False라 판단하고, 그 이상이면 True라 판단.
 > 
-> **2.** MS CoCo: 다양한 기준을 적용하여 평가하는데 있어 까다로움.
+> **2.** MS CoCo: 다양한 IoU threshold 기준을 적용하여 평가하는데 있어 까다로움.
+
+### 2. mAP (mean average precision)
+- 실제 Object가 Detected된 재현율(Recall)의 변화에 따른 정밀도(Precision)의 값을 평균한 성능 수치.
+
+#### 정밀도(Precision)와 재현율(Recall)
+
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112232-8e1557b2-de5d-4dda-bf6a-ba1c3a54f958.png width = 600></p>
+
+
+> **1. 정밀도(Precision):** 예측을 Positive로 한 대상들 중에 예측과 실제값이 Positive로 일치하는 데이터의 비율
+> 
+> Object Detection에서는 검출 알고리즘이 검출 예측한 결과가 **실제 Object들과 얼마나 일치**하는지를 나타내는 지표
+>
+>  ex) 이미지에 있는 동물들을 새(bird)라고 예측했을 때, 실제로 새(bird)일 확률
+> 
+> **2. 재현율(Recall):** 실제값이 Positive인 대상 중에 예측과 실제 값이 Positive로 일치하는 데이터의 비율
+> 
+> - Object Detection에서는 검출 알고리즘이 **실제 Object들을 빠뜨리지 않고, 얼마나 정확히 검출 예측**하는지를 나타내는 지표
+>
+>  ex) 이미지에 있는 새(bird)들을 몇 마리나 정확히 검출했는지의 비율
