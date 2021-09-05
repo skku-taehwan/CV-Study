@@ -140,7 +140,13 @@ Confidence 임곗값이 낮을수록 더 많은 bounding box를 생성하여 정
 - Recall 값의 변화에 따른 Precision값을 나타낸 곡선.
 - 이때, 해당 그래프 아래의 면적을 AP (Average precision)이라고 부름.
 
-![image](https://user-images.githubusercontent.com/74092405/132112528-0c9c5e22-6d97-4964-a2dc-b71576a619a4.png)
-
-
 <p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132112319-4355094a-8883-41b8-b505-6752e34d8bde.png width = 600></p>
+
+### mAP 계산하기
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132121659-bae0c69f-aea8-4e34-b024-00ec052cd9ef.png width = 600></p>
+
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/132121725-027dba8e-4143-46cd-8f60-83c030a3bbb0.png width = 600></p>
+
+- AP = Confidence score에 따른 Recall-Precision 그래프를 그린 후, 오른쪽 기준으로 최대 Precision 값들을 연결하여 계단 형태의 그래프를 얻은 후 그 면적을 계산.
+- mAP = 여러 개의 Object에 대한 AP값을 계산하여 평균값을 구하면 계산할 수 있음.
