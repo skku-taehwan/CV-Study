@@ -112,4 +112,96 @@
 
 ## Fast RCNN
 
+### R-CNN의 발전
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133008861-255db58d-ccbd-4550-b0c2-45a850c9ba89.png width = 600></p>
+
+**1. R-CNN:** 처음으로 Object detection 분야에 DL을 적용하여, Classification 전 단계에 CNN을 도입.
+**2. Fast R-CNN:** 이미지 1개로만 학습을 진행하고, ROI Pooling을 사용하여, 2000개의 Region proposal을 사용하던 R-CNN의 학습 속도를 개선함.
+**3. Faster R-CNN:** Selective search 기법을 DL network 안에 포함시켜 RPN구조로 만들어 사용.
+
+### Fast RCNN
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133008901-0ac2c2c8-b79c-4163-9d0d-ebb0a638b065.png width = 600></p>
+
+- SPP Net의 SPP layer를 ROI pooling layer로 사용함.
+- **SPP Net**은 입력된 이미지 자체를 Convolution network에 넣어 feature map을 만들고, 그 F.M.으로부터 Region proposal을 생성함.
+- ROI pooling을 통해 ene-to-end 학습을 가능하게 함.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009227-05a603c6-ef3f-4994-981e-dc2071ac40c7.png width = 600></p>
+
+- ROI pooling이란 ROI (Region of interest) 영역에 해당하는 부분을 max pooling하여 feature map을 고정된 길이의 저차원 벡터로 축소함.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009294-080f8202-5314-4e29-a1ee-57e2013aab30.png width = 600></p>
+
+
+- Fast RCNN은 CNN feature extraction, classification, bounding box regression을 모두 하나의 모델에서 학습시키는 모델임.
+- 이때, Multi-task loss 함수를 적용함. (Classification loss + Regression loss)
+- 또한, Classification 단계에서 SVM classifier 대신 softmax 함수를 사용하여 분류를 진행함.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009351-f541a39c-7f66-48ea-be55-7bcebc0b70da.png width = 600></p>
+
 ## Faster RCNN
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009401-3c5b2166-192b-4652-bd60-fc5192e50476.png width = 600></p>
+
+- Faster RCNN은 위의 그림과 같이 Fast RCNN에 RPN을 추가한 모델임.
+- RPN (Region proposal network)은 Region proposal 시에 사용되는 selective search 기법을 neural netwrok 구조(RPN)로 변경함으로써, 학습과 Inference 속도를 향상시켰음.
+- Fast RCNN과 마찬가지로, End to end 학습 네트워크를 가짐.
+- Object detection을 구성하는 모든 요소가 DL으로 구현된 첫 번째 모델.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009568-f33cc186-c6b7-4019-9130-90f51f3ef225.png width = 600></p>
+
+- Anchor box를 reference로 활용하여 object가 있을만한 영역의 후보 bounding box를 얻음.
+- 즉, Ground truch를 기준으로 데이터를 넣어 anchor box를 학습하는 network라 할 수 있음.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009618-22274732-b3fc-4798-90b0-6958e5f03777.png width = 600></p>
+
+- Anchor box는 총 9개의 서로 다른 크기와 비율을 같는 사각형 프레임으로, Box의 중심점이 되는 grid point를 기준으로 anchor box를 생성함.
+- 서로 다른 크기와 비율의 anchor box로 인해, 하나의 anchor box만으로는 다른 크기의 같은 object를 detection하기 어려움.
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009807-cef18a12-8952-47da-9c45-edc1d5157577.png width = 600></p>
+
+- 각각의 grid point로 부터 anchor box를 생성하기 때문에 총 50x38x9개의 anchor box가 생성됨.
+- 이렇게 생성된 anchor box를 RPN을 통해 학습을 진행.
+
+
+### RPN Network 구조
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009904-b8d520d4-c105-4065-ac75-a45f7085fe7c.png width = 600></p>
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133009948-7621c685-d2db-4593-a392-dc82116dd105.png width = 600></p>
+
+- RPN Network는 원본 이미지를 통해 생성된 feature map을 Convolution layer의 입력으로 받아 Class를 분류하는 layer와 bounding box의 위치를 regression하는 layer에서 학습이 진행됨.
+
+**RPN bounding box regression**
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133010094-0cdad578-9faf-4c0c-aa4f-17d19325d797.png width = 600></p>
+
+- RCNN box regression의 구조와 유사하지만, 원본 G.T. 대신에 RPN으로 예측된 G.T.와 Anchor box를 사용한다는 점에서 다름.
+- RCNN과 표기 방법이 유사하기 때문에 그 점에 유의해야 함.
+- 또한, IoU 값이 0.7 이상이면 Positive anchor box, 0.3보다 작으면 Negative anchor box라 하며, 0.3~0.7 사이의 IoU값을 갖는 anchor box는 학습에서 제외시킴. (filtering out)
+
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133010217-77cefc9c-fce5-458f-b816-ec7740a901f0.png width = 600></p>
+
+- 따라서, 예측된 bounding box와 positive anchor box 간의 거리(좌표) 차이가 ground truch와 positive anchor box 간 거리 차이와 최대한 같아지도록 regression을 하는 것이 RPN의 목적임.
+- 즉, predicted boudning box와 ground truth가 거의 동일해지도록 학습을 진행.
+
+### RPN Loss function
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133010367-d3c18ca9-bd03-4848-8046-d45dc6aa24ea.png width = 600></p>
+
+- Positive anchor box만을 Regression 시키는 것이 식으로 나타나 있음.
+- Classification 함수로는 Sigmoid와 Softmax 둘 중에 하나를 사용함.
+
+### Faster RCNN Training
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133010432-5d0bbb90-7495-4020-b9a5-35c910df60ae.png width = 600></p>
+
+1. 원본 이미지로 얻은 F.M.을 입력으로 사용하여 RPN을 학습
+2. Fast RCNN Classification/Regression 학습을 진행.
+3. 2번에서 나온 결괏값을 활용하여 RPN을 Fine Tuning 진행.
+4. 다시 3번의 결과를 활용해 Fast RCNN을 Fine Tuning.
+
+
+## 참고자료
+1. 딥러닝 컴퓨터비전 가이드, https://www.inflearn.com/course/%EB%94%A5%EB%9F%AC%EB%8B%9D-%EC%BB%B4%ED%93%A8%ED%84%B0%EB%B9%84%EC%A0%84-%EC%99%84%EB%B2%BD%EA%B0%80%EC%9D%B4%EB%93%9C/dashboard
+2. Faster R-CNN, https://welcome-to-dewy-world.tistory.com/110
+
