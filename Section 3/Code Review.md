@@ -222,7 +222,7 @@ plt.figure(figsize=(12, 12))
 plt.imshow(img_rgb)
 ```
 
-<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133091088-e36c9f64-305d-4760-a338-3c53b7855ded.png width = "600"></p>
+<p align = "center"><img src=https://user-images.githubusercontent.com/74092405/133092426-67c6f3fc-245c-4ed4-932a-1db85bec8308.png width = "600"></p>
 
 
 ### Video Object Detection 수행
