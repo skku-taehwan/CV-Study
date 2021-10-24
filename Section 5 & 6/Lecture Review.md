@@ -44,7 +44,7 @@
 
 <p align = "center"><img src= https://user-images.githubusercontent.com/74092405/135952273-35504a51-fb1d-44dd-8160-600f5452ce42.png width=600></p>
 
-- SSD Network에서 multi-scale feature map과 default box를 적용ㅎ란 결과로, 큰 feature map에서는 작은 object를 잘 detect하고, 작은 feature map에서는 큰 object를 잘 detect함.
+- SSD Network에서 multi-scale feature map과 default box를 적용 결과로, 큰 feature map에서는 작은 object를 잘 detect하고, 작은 feature map에서는 큰 object를 잘 detect함.
 
 ### Loss function
 <p align = "center"><img src= https://user-images.githubusercontent.com/74092405/135952367-536505bc-db1b-44a4-9fca-15e1dd40d90e.png width=600></p>
