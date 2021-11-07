@@ -67,7 +67,7 @@
 - 적은 연산 수와 파라미터 수에 비해 상대적으로 높은 모델 예측 성능을 보여줌.
 
 ### EfficientNet
-<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/140634024-b0c72f51-830b-4459-bd9a-4082ce77c033.png width = 800></p>
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/140634024-b0c72f51-830b-4459-bd9a-4082ce77c033.png width = 600></p>
 
 - EfficientNet은 네트워크의 깊이(Depth), 필터 수(Width), 이미지 Resolution 크기를 최적으로 조합하여 모델의 성능을 극대화 시키는 모델임.
 - 각각의 요소들을 따로 최적화해서는 최적의 모델을 구축할 수 없기 때문에 최적의 조합을 찾기 위한 연구를 통해 개발됨.
@@ -87,9 +87,37 @@
 - 이를 통해, B0~B7까지의 모델을 구축.
 - Inference 속도가 빠르면서 동시에 예측 성능도 향상됨.
 
+### BiFPN (Bi-directional FPN)
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/140634192-1b21e033-bcfe-4857-93e1-6af55c7b1fb6.png width = 800></p>
 
+- BiFPN은 FPN을 변형시킨 것으로, 상위 F.M.이 하위로 내려가기만 하는 것보다 쌍방향으로 F.M.이 주고받는 것이 보다 높은 성능을 얻을 수 있을 거라 생각해서 개발됨.
+- 기본적으로 해당 level의 F.M.과 각각 upsampling, downsampling된 상위 & 하위 F.M.이 합쳐져 class subnet에 적용되는 구조이며, 각각의 feature map에 가중치를 부여함.
 
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/140634262-0557db38-fdfe-4a40-bf09-2981daa01ec3.png width = 800></p>
 
+- 또한, 연산량을 줄이기 위해 Separable Convolution을 적용함. (이전에는 Channel-wise convolution 적용)
+
+### Compound Scaling
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/140634294-e3d6e87a-9793-4d3c-9949-3d405fa3e6bd.png width = 800></p>
+
+- 상기에 언급된 EfficientNet과 BiFPN, 그리고 Class/Box prediction Net을 Compound scaling으로 모델을 구축한 것이 EfficientDet임.
+
+> **1. Backbone network는 EfficientNet에서 구축한 B0~B6으로 Scaling을 적용**
+>
+> **2. BiFPN network**
+> - Depth는 BiFPN Repeatition block를 3 + phi로 설정하고 scaling 적용
+> - Width는 {1.2, 1.25, 1.3, 1.35, 1.4, 1.45} 중 Grid Search로 1.35의 Scaling 계수를 선택하는 Scaling 적용
+> 
+> **3. Prediction network의 수는 BiFPN**
+> - Width는 BiFPN와 동일
+> - Depth는 3 + [phi/3] 을 적용
+> 
+> **4. 입력 이미지의 크기**
+> - 512 + phi * 128
+
+- EfficientNet에서 개별 요소들을 함께 Scaling하면서 최적 결합을 통한 성능 향상을 보여줌.
+- Backbone, BiFPN, Prediction layer, Input image size를 Scaling 기반으로 최적 결합하여 D0~D7 모델을 구성
+<p align = "center"><img src = https://user-images.githubusercontent.com/74092405/140634438-2f9e6286-300a-43d1-834f-b05165f67067.png width = 800></p>
 
 
 
